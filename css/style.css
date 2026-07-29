@@ -1,0 +1,711 @@
+/* ==========================================================================
+   FREE-TO-PLAY GAMES — "POSTER INDEX" THEME
+   Arcade Marquee × Swiss Editorial: flat poster color, thick black hairlines,
+   halftone print texture, and disciplined numbering used as real structure
+   (section order, chip order) rather than decoration.
+
+   Signature: the headline uses a 3px red "misregistration" offset — the
+   look of a cheap two-colour screenprint where the plates don't line up
+   perfectly. Used ONCE, on the hero h1 only.
+   ========================================================================== */
+
+:root {
+    --paper: #ffffff;
+    --paper-2: #f4f4f0;
+    --ink: #131316;
+    --red: #e8352b;
+    --yellow: #ffc738;
+    --muted: #6b6e76;
+    --line: #131316;
+
+    --font-display: "Anton", "Arial Narrow", sans-serif;
+    --font-body: "Archivo", "Roboto", sans-serif;
+    --font-mono: "Space Mono", "Roboto Mono", monospace;
+
+    --radius: 3px;
+    --hard-shadow: 6px 6px 0 var(--ink);
+}
+
+/* Dark theme: toggle by adding data-theme="dark" to <html> or <body> */
+[data-theme="dark"] {
+    --paper: #15161A;
+    --paper-2: #1E2027;
+    --ink: #F2F1EC;
+    --red: #FF4438;
+    --yellow: #F2C14E;
+    --muted: #9A9DA6;
+    --line: rgba(255, 255, 255, 0.14);
+    --hard-shadow: 6px 6px 0 rgba(255, 255, 255, 0.08);
+}
+
+/* Custom circular loader (adapted colors to site variables) */
+
+/* Ensure loader sits nicely inside #loading */
+#loading {
+    display: flex;
+    gap: 0.8rem;
+    align-items: center;
+}
+
+/* Small adjustments for the new toggle buttons */
+#musicToggle,
+#themeToggle {
+    background: transparent;
+    border: 2px solid var(--line);
+    color: var(--ink);
+    padding: 0.35rem 0.5rem;
+    border-radius: 4px;
+}
+
+#musicToggle i,
+#themeToggle i {
+    width: 18px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-body);
+    background: var(--paper);
+    color: var(--ink);
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+:focus-visible {
+    outline: 3px solid var(--red);
+    outline-offset: 2px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+    font-family: var(--font-display);
+    text-transform: uppercase;
+    letter-spacing: 0.01em;
+    color: var(--ink);
+    line-height: 0.95;
+}
+
+.accent {
+    color: var(--red);
+}
+
+.container {
+    max-width: 1140px;
+}
+
+@media (min-width: 1200px) {
+    .container {
+        max-width: 1080px;
+    }
+}
+
+/* ==========================================================================
+   NAVBAR
+   ========================================================================== */
+
+.navbar {
+    background: var(--paper) !important;
+    border-bottom: 3px solid var(--ink);
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+.navbar-brand img {
+    filter: none;
+}
+
+.nav-top-link {
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 0.85rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink) !important;
+    padding: 0.5rem 0.8rem !important;
+    position: relative;
+}
+
+.nav-top-link::after {
+    content: "";
+    position: absolute;
+    left: 0.8rem;
+    right: 0.8rem;
+    bottom: 0.25rem;
+    height: 3px;
+    background: var(--red);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.15s ease;
+}
+
+.nav-top-link:hover::after,
+.nav-top-link:focus-visible::after {
+    transform: scaleX(1);
+}
+
+.dropdown-menu {
+    background: var(--paper);
+    border: 3px solid var(--ink);
+    border-radius: 0;
+    padding: 0.3rem;
+    box-shadow: var(--hard-shadow);
+}
+
+.dropdown-item {
+    font-family: var(--font-body);
+    font-weight: 600;
+    color: var(--ink);
+    border-radius: 0;
+    padding: 0.5rem 0.8rem;
+}
+
+.dropdown-item:hover,
+.dropdown-item:focus {
+    background: var(--yellow);
+    color: var(--ink);
+}
+
+.icon-btn {
+    color: var(--ink) !important;
+    font-size: 0.95rem;
+    padding: 0.5rem 0.55rem !important;
+}
+
+.icon-btn:hover {
+    color: var(--red) !important;
+}
+
+.btn-outline-ftg {
+    border: 2px solid var(--ink);
+    color: var(--ink);
+    padding: 0.4rem 0.9rem;
+    border-radius: var(--radius);
+    font-family: var(--font-body);
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    font-size: 0.82rem;
+    transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.12s ease;
+}
+
+.btn-outline-ftg:hover {
+    background: var(--ink);
+    color: var(--paper);
+    box-shadow: 4px 4px 0 var(--red);
+    transform: translate(-2px, -2px);
+}
+
+/* ==========================================================================
+   TICKET / INDEX CHIP BAR
+   Numbers are drawn with a CSS counter, so element.textContent (what
+   main.js reads to build the search query) stays exactly the category
+   name, e.g. "Shooter" — never "01 Shooter".
+   ========================================================================== */
+
+.endpoint-bar {
+    background: var(--paper-2);
+    border-bottom: 3px solid var(--ink);
+}
+
+.endpoint-scroller {
+    counter-reset: chipnum;
+    display: flex;
+    gap: 0;
+    overflow-x: auto;
+    scrollbar-width: thin;
+}
+
+.endpoint-chip {
+    counter-increment: chipnum;
+    flex: 0 0 auto;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 0.82rem;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    color: var(--ink) !important;
+    white-space: nowrap;
+    padding: 0.75rem 1.1rem;
+    border-right: 2px solid var(--ink);
+    transition: background 0.12s ease, color 0.12s ease;
+}
+
+.endpoint-scroller a.endpoint-chip:first-child {
+    border-left: 2px solid var(--ink);
+}
+
+.endpoint-chip::before {
+    content: counter(chipnum, decimal-leading-zero);
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    color: var(--red);
+}
+
+.endpoint-chip:hover {
+    background: var(--yellow);
+}
+
+.endpoint-chip.active {
+    background: var(--ink);
+    color: var(--paper) !important;
+}
+
+.endpoint-chip.active::before {
+    color: var(--yellow);
+}
+
+/* ==========================================================================
+   SECTION NUMBERING — meaningful order, not decoration.
+   ========================================================================== */
+
+main {
+    counter-reset: sectionnum;
+}
+
+.section-heading {
+    margin-bottom: 1.4rem;
+}
+
+.section-heading .eyebrow {
+    counter-increment: sectionnum;
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    color: var(--red);
+    margin-bottom: 0.3rem;
+}
+
+.section-heading .eyebrow::before {
+    content: "N° " counter(sectionnum, decimal-leading-zero) " — ";
+}
+
+.section-heading h2 {
+    font-size: 2.1rem;
+    margin: 0;
+}
+
+/* ==========================================================================
+   HERO
+   ========================================================================== */
+
+header.hero {
+    padding: 4rem 0 3.5rem;
+    border-bottom: 3px solid var(--ink);
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-issue {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    display: inline-block;
+    margin-bottom: 1.2rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 2px solid var(--ink);
+}
+
+.hero h1 {
+    font-size: clamp(2.6rem, 6vw, 4.6rem);
+    margin-bottom: 1.1rem;
+    /* signature: cheap screenprint misregistration, headline only */
+    text-shadow: 3px 3px 0 var(--red);
+}
+
+.hero .lead {
+    font-family: var(--font-body);
+    text-transform: none;
+    letter-spacing: normal;
+    color: var(--muted);
+    font-size: 1.1rem;
+    max-width: 46ch;
+    margin: 0 auto 1.9rem;
+    font-weight: 400;
+}
+
+.btn-primary {
+    background: var(--red);
+    border: 2px solid var(--ink);
+    color: var(--paper);
+    font-family: var(--font-body);
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    padding: 0.6rem 1.5rem;
+    border-radius: var(--radius);
+    transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+
+.btn-primary:hover {
+    box-shadow: var(--hard-shadow);
+    transform: translate(-3px, -3px);
+    background: var(--red);
+    color: var(--paper);
+}
+
+.btn-outline-secondary {
+    border: 2px solid var(--ink);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    padding: 0.6rem 1.5rem;
+    border-radius: var(--radius);
+    transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.12s ease;
+}
+
+.btn-outline-secondary:hover {
+    background: var(--yellow);
+    box-shadow: var(--hard-shadow);
+    transform: translate(-3px, -3px);
+}
+
+/* ==========================================================================
+   FEATURED
+   ========================================================================== */
+
+.featured-card {
+    position: relative;
+    border: 3px solid var(--ink);
+    border-radius: var(--radius);
+    overflow: hidden;
+}
+
+.featured-img {
+    height: 360px;
+    width: 100%;
+    object-fit: cover;
+    filter: grayscale(0.15) contrast(1.05);
+    animation: zoomSlow 16s ease-in-out infinite alternate;
+}
+
+@keyframes zoomSlow {
+    from {
+        transform: scale(1);
+    }
+
+    to {
+        transform: scale(1.05);
+    }
+}
+
+.featured-token {
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: var(--red);
+    border: 3px solid var(--ink);
+    color: var(--paper);
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+}
+
+.featured-caption {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    color: var(--ink);
+    padding: 1.1rem 1.3rem 1.2rem;
+    background: var(--yellow);
+    border-top: 3px solid var(--ink);
+}
+
+.featured-caption h3 {
+    font-size: 1.7rem;
+    margin-bottom: 0.2rem;
+}
+
+.featured-caption p {
+    color: var(--ink);
+    font-weight: 500;
+}
+
+.btn-light {
+    background: var(--ink);
+    color: var(--paper);
+    border: 2px solid var(--ink);
+    border-radius: var(--radius);
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+}
+
+.btn-light:hover {
+    background: var(--paper);
+    color: var(--ink);
+}
+
+.thumb-list img {
+    border: 3px solid var(--ink);
+    border-radius: var(--radius);
+    object-fit: cover;
+    height: 108px;
+    width: 100%;
+    transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+
+.thumb-list img:hover {
+    transform: translate(-3px, -3px);
+    box-shadow: 5px 5px 0 var(--red);
+}
+
+/* ==========================================================================
+   LOADING — caution-stripe progress bar, arcade "insert coin" energy
+   ========================================================================== */
+
+#loading {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--ink);
+    margin-bottom: 1.3rem;
+}
+
+#loading .stripe-bar {
+    flex: 1 1 auto;
+    height: 10px;
+    border: 2px solid var(--ink);
+    overflow: hidden;
+    background: var(--paper);
+}
+
+#loading .stripe-bar::before {
+    content: "";
+    display: block;
+    height: 100%;
+    width: 200%;
+    background: repeating-linear-gradient(45deg,
+            var(--ink) 0 8px,
+            var(--yellow) 8px 16px);
+    animation: marchStripes 0.9s linear infinite;
+}
+
+@keyframes marchStripes {
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(-16px);
+    }
+}
+
+/* ==========================================================================
+   CARDS — flat, hard-edged, with a halftone corner tab (pure CSS, so it
+   also applies automatically to the cards main.js injects into #rowBody)
+   ========================================================================== */
+
+.card {
+    position: relative;
+    background: var(--paper);
+    border: 3px solid var(--ink);
+    border-radius: var(--radius);
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(6px);
+    animation: fadeUp 0.4s ease forwards;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+@keyframes fadeUp {
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+.card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 34px;
+    height: 34px;
+    clip-path: polygon(0 0, 100% 0, 0 100%);
+    background-image: radial-gradient(var(--ink) 1.4px, transparent 1.6px);
+    background-size: 6px 6px;
+    opacity: 0.35;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.card:hover {
+    transform: translate(-4px, -4px);
+    box-shadow: var(--hard-shadow);
+}
+
+.card-img-top {
+    height: 170px;
+    object-fit: cover;
+}
+
+.card-body {
+    padding: 1rem 1.1rem 1.15rem;
+}
+
+.card-title {
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    letter-spacing: 0.01em;
+    margin-bottom: 0.3rem;
+}
+
+.card-text,
+.card .text-muted {
+    color: var(--muted) !important;
+    font-size: 0.88rem;
+    font-weight: 500;
+    margin-bottom: 0;
+}
+
+/* ==========================================================================
+   SPECIAL OFFERS
+   ========================================================================== */
+
+.offer-badge {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.05em;
+    color: var(--ink);
+    background: var(--yellow);
+    border: 2px solid var(--ink);
+    border-radius: var(--radius);
+    padding: 0.15rem 0.5rem;
+    margin-bottom: 0.55rem;
+    transform: rotate(-2deg);
+}
+
+/* ==========================================================================
+   FOOTER — inverted block for contrast, per Swiss poster convention
+   ========================================================================== */
+
+footer {
+    background: var(--ink) !important;
+    color: var(--paper);
+    border-top: 6px solid var(--red);
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
+
+footer h5 {
+    font-family: var(--font-display);
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 0.85rem;
+}
+
+footer a {
+    color: var(--paper);
+    text-decoration: none;
+    font-family: var(--font-body);
+    font-weight: 600;
+    display: inline-block;
+    margin-bottom: 0.55rem;
+}
+
+footer a:hover,
+footer a:focus-visible {
+    color: var(--yellow);
+}
+
+footer .footer-top {
+    border-bottom: 3px solid var(--paper);
+    padding-bottom: 1.5rem;
+}
+
+footer .footer-links {
+    gap: 3rem;
+}
+
+footer .footer-column ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+footer .footer-brand {
+    min-width: 210px;
+}
+
+footer .footer-mark {
+    width: 64px;
+    height: 64px;
+    background: var(--paper);
+    clip-path: polygon(25% 6.7%, 75% 6.7%, 100% 50%, 75% 93.3%, 25% 93.3%, 0% 50%);
+    border: 3px solid var(--paper);
+}
+
+footer .footer-social a {
+    width: 38px;
+    height: 38px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: 2px solid var(--paper);
+    border-radius: 8px;
+    color: var(--paper);
+    transition: transform 0.12s ease, background 0.12s ease;
+}
+
+footer .footer-social a:hover,
+footer .footer-social a:focus-visible {
+    background: var(--paper);
+    color: var(--ink);
+    transform: translate(-2px, -2px);
+}
+
+footer .footer-bottom {
+    border-top: 3px solid var(--paper);
+    padding-top: 1rem;
+}
+
+footer .footer-bottom img {
+    filter: invert(1);
+}

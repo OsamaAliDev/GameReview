@@ -1,0 +1,333 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Free-To-Play Games</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;500;700;800&family=Space+Mono:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="vendor/bootstrap-5.3.8-dist/css/bootstrap.css"
+    />
+    <link rel="stylesheet" href="vendor/fontawesome/css/all.css" />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg">
+      <div class="container">
+        <a class="navbar-brand" href="#">
+          <img src="images/freetogame-logo.png" height="38" alt="logo" />
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#nav"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="nav">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item dropdown">
+              <a
+                class="nav-top-link dropdown-toggle"
+                href="#"
+                id="gamesDropdown"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+                >Games List</a
+              >
+              <ul class="dropdown-menu" aria-labelledby="gamesDropdown">
+                <li><a class="dropdown-item" href="#">MMORPG</a></li>
+                <li><a class="dropdown-item" href="#">Shooter</a></li>
+                <li><a class="dropdown-item" href="#">MOBA</a></li>
+                <li><a class="dropdown-item" href="#">Anime</a></li>
+                <li><a class="dropdown-item" href="#">Battle Royale</a></li>
+                <li><a class="dropdown-item" href="#">Strategy</a></li>
+                <li><a class="dropdown-item" href="#">Fantasy</a></li>
+                <li><a class="dropdown-item" href="#">Sci-Fi</a></li>
+                <li><a class="dropdown-item" href="#">Card Games</a></li>
+                <li><a class="dropdown-item" href="#">Racing</a></li>
+                <li><a class="dropdown-item" href="#">Fighting</a></li>
+                <li><a class="dropdown-item" href="#">Social</a></li>
+                <li><a class="dropdown-item" href="#">Sports</a></li>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a class="nav-top-link" href="#">Special Offers</a>
+            </li>
+            <li class="nav-item"><a class="nav-top-link" href="#">API</a></li>
+          </ul>
+          <ul class="navbar-nav ms-auto align-items-center">
+            <li class="nav-item me-1">
+              <a
+                class="icon-btn"
+                href="#"
+                data-bs-toggle="tooltip"
+                title="Search"
+                ><i class="fas fa-search"></i
+                ><span class="ms-1 d-lg-none"> Search</span></a
+              >
+            </li>
+            <li class="nav-item me-1">
+              <a
+                class="icon-btn"
+                href="#"
+                data-bs-toggle="tooltip"
+                title="My Inventory"
+                ><i class="fas fa-gift"></i
+                ><span class="ms-1 d-lg-none"> My Inventory</span></a
+              >
+            </li>
+            <li class="nav-item me-3">
+              <a
+                class="icon-btn"
+                href="#"
+                data-bs-toggle="tooltip"
+                title="My Games"
+                ><i class="fas fa-clone"></i
+                ><span class="ms-1 d-lg-none"> My Games</span></a
+              >
+            </li>
+            <li class="nav-item me-2">
+              <a class="nav-top-link" href="#">Log In</a>
+            </li>
+            <li class="nav-item">
+              <a class="btn btn-outline-ftg" href="#">Join Free</a>
+            </li>
+            <li class="nav-item ms-2">
+              <button
+                type="button"
+                id="musicToggle"
+                class="icon-btn"
+                aria-label="Toggle background music"
+                title="Play background music"
+              >
+                <i class="fas fa-play"></i
+                ><span class="ms-1 d-lg-none"> Music</span>
+              </button>
+            </li>
+            <li class="nav-item ms-2">
+              <button
+                type="button"
+                id="themeToggle"
+                class="icon-btn"
+                aria-label="Toggle theme"
+                title="Toggle dark mode"
+              >
+                <i class="fas fa-moon"></i
+                ><span class="ms-1 d-lg-none"> Theme</span>
+              </button>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!--
+      TICKET / INDEX CHIP BAR — what main.js hooks into.
+      btns = document.querySelectorAll(".nav-link") picks all of these up.
+      The leading number on each chip is a CSS counter (::before), never a
+      real text node, so e.target.textContent in main.js still returns just
+      the plain category name, e.g. "Shooter".
+    -->
+    <div class="endpoint-bar">
+      <div class="container px-0">
+        <div class="endpoint-scroller">
+          <a class="nav-link endpoint-chip" href="#">MMORPG</a>
+          <a class="nav-link endpoint-chip" href="#">Shooter</a>
+          <a class="nav-link endpoint-chip" href="#">MOBA</a>
+          <a class="nav-link endpoint-chip" href="#">Anime</a>
+          <a class="nav-link endpoint-chip" href="#">Battle Royale</a>
+          <a class="nav-link endpoint-chip" href="#">Strategy</a>
+          <a class="nav-link endpoint-chip" href="#">Fantasy</a>
+          <a class="nav-link endpoint-chip" href="#">Sci-Fi</a>
+          <a class="nav-link endpoint-chip" href="#">Card Games</a>
+          <a class="nav-link endpoint-chip" href="#">Racing</a>
+          <a class="nav-link endpoint-chip" href="#">Fighting</a>
+          <a class="nav-link endpoint-chip" href="#">Social</a>
+          <a class="nav-link endpoint-chip" href="#">Sports</a>
+        </div>
+      </div>
+    </div>
+
+    <header class="hero py-5 text-center">
+      <div class="container">
+        <span class="hero-issue">FREE-TO-PLAY INDEX — VOL. 01</span>
+        <h1>
+          Discover the best <span class="accent">free-to-play</span> PC games!
+        </h1>
+        <p class="lead mx-auto">
+          Track what you've played and search for what to play next.
+        </p>
+        <a class="btn btn-primary me-2" href="#">Get Started</a>
+        <a class="btn btn-outline-secondary" href="#">Browse Games</a>
+      </div>
+    </header>
+
+    <main class="my-5">
+      <div class="container">
+        <div class="row mb-5">
+          <div class="col-lg-8">
+            <div class="featured-card mb-3 mb-lg-0">
+              <span class="featured-token">01</span>
+              <img
+                src="images/resize.jpg"
+                alt="featured"
+                class="w-100 featured-img"
+              />
+              <div class="featured-caption">
+                <h3 class="mb-1">Marvel Rivals</h3>
+                <p class="mb-0">A Super Hero Team-Based PVP Shooter!</p>
+                <a class="btn btn-light btn-sm mt-2" href="#">Play Free</a>
+              </div>
+            </div>
+          </div>
+          <aside class="col-lg-4">
+            <div class="thumb-list d-flex flex-column gap-2 h-100">
+              <img src="images/thumbnail.jpg" alt="thumb" />
+              <img src="images/thumbnail(1).jpg" alt="thumb" />
+              <img src="images/thumbnail(2).jpg" alt="thumb" />
+            </div>
+          </aside>
+        </div>
+
+        <section class="mb-5">
+          <div class="section-heading">
+            <span class="eyebrow"></span>
+            <h2>Trending Games</h2>
+          </div>
+
+          <!-- toggled by main.js via classList.remove/add("d-none") -->
+          <div id="loading" class="d-none">
+            <span>Fetching results</span>
+            <span class="stripe-bar"></span>
+          </div>
+
+          <!-- populated by display() in main.js -->
+          <div
+            id="rowBody"
+            class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4"
+          ></div>
+        </section>
+
+        <section>
+          <div class="section-heading">
+            <span class="eyebrow"></span>
+            <h2>Special Offers</h2>
+          </div>
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <div class="card h-100">
+                <img src="images/wot-sp.jpg" class="card-img-top" alt="offer" />
+                <div class="card-body">
+                  <span class="offer-badge">LIMITED TIME</span>
+                  <h5 class="card-title">
+                    World of Tanks Starter Pack Giveaway
+                  </h5>
+                  <p class="text-muted mb-0">Grab it before it's gone.</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 mb-3">
+              <div class="card h-100">
+                <img
+                  src="images/herowars.jpg"
+                  class="card-img-top"
+                  alt="offer"
+                />
+                <div class="card-body">
+                  <span class="offer-badge">LIMITED TIME</span>
+                  <h5 class="card-title">Hero Wars Tristan Pack Giveaway</h5>
+                  <p class="text-muted mb-0">Grab it before it's gone.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+      <div class="modal fade" id="gameModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="gameModalTitle">...</h5>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+              ></button>
+            </div>
+            <div class="modal-body" id="gameModalBody">
+              <!-- هنا هنحط التفاصيل ديناميكيًا -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="py-4">
+      <div class="container">
+        <div
+          class="footer-top d-flex flex-column flex-lg-row justify-content-between gap-4"
+        >
+          <div class="footer-links d-flex flex-column flex-sm-row gap-4">
+            <div class="footer-column">
+              <h5>About</h5>
+              <ul class="list-unstyled mb-0">
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">API Documentation</a></li>
+                <li><a href="#">Privacy Policy</a></li>
+              </ul>
+            </div>
+            <div class="footer-column">
+              <h5>Support</h5>
+              <ul class="list-unstyled mb-0">
+                <li><a href="#">Contact Us</a></li>
+                <li><a href="#">Terms of Use</a></li>
+                <li><a href="#">Cookies Policy</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="footer-brand d-flex align-items-center gap-3">
+            <div class="footer-mark" aria-hidden="true"></div>
+            <div>
+              <p class="mb-1 small text-uppercase">Digiwalls Media</p>
+              <p class="mb-0 small">Free-to-play review hub.</p>
+            </div>
+          </div>
+        </div>
+        <div class="footer-social mt-4 d-flex align-items-center gap-3">
+          <a href="#" aria-label="Facebook"
+            ><i class="fab fa-facebook-f"></i
+          ></a>
+          <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+          <a href="#" aria-label="RSS"><i class="fas fa-rss"></i></a>
+        </div>
+        <div
+          class="footer-bottom mt-4 d-flex flex-column flex-md-row justify-content-between align-items-center gap-2"
+        >
+          <p class="mb-0 small">© 2026 Digiwalls Media, all rights reserved.</p>
+          <img src="images/logo-footer.png" style="width: 74px" alt="footer" />
+        </div>
+      </div>
+    </footer>
+
+    <script src="vendor/fontawesome/js/all.min.js"></script>
+    <script src="vendor/bootstrap-5.3.8-dist/js/bootstrap.js"></script>
+    <script src="js/Return details from a specific game.js"></script>
+    <script src="js/theme-toggle.js"></script>
+    <script src="js/music-toggle.js"></script>
+    <script src="js/main.js"></script>
+    <!-- Background music element: using local file provided by user -->
+    <audio
+      id="bgMusic"
+      preload="none"
+      loop
+      src="music/mfcc-retro-arcade-game-music-297305.mp3"
+    ></audio>
+  </body>
+</html>
