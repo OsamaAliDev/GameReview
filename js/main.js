@@ -1,6 +1,9 @@
 var rowBody = document.getElementById("rowBody");
 var btns = document.querySelectorAll(".nav-link");
 var loading = document.getElementById("loading");
+var searchToggle = document.getElementById("searchToggle");
+var gameSearch = document.getElementById("gameSearch");
+var allGames = [];
 
 var categoryMap = {
     "MMORPG": "mmorpg",
@@ -38,9 +41,11 @@ async function getGame(category = '') {
     try {
         const response = await fetch(url, options);
         const result = await response.json();
-        display(result);
+        allGames = Array.isArray(result) ? result : [];
+        refreshDisplay();
     } catch (error) {
         console.error(error);
+        allGames = [];
         rowBody.innerHTML = '<div class="col-12"><p class="text-center text-danger">error.</p></div>';
     } finally {
         loading.classList.add("d-none");
@@ -70,6 +75,30 @@ function display(arr) {
     rowBody.innerHTML = box;
 }
 
+function refreshDisplay() {
+    if (gameSearch && gameSearch.value.trim()) {
+        searchGames(gameSearch.value);
+    } else {
+        display(allGames);
+    }
+}
+
+function searchGames(query) {
+    var term = (query || '').trim().toLowerCase();
+
+    if (!term) {
+        display(allGames);
+        return;
+    }
+
+    var filtered = allGames.filter(function (game) {
+        var haystack = (game.title + ' ' + game.short_description + ' ' + (game.genre || '') + ' ' + (game.platform || '')).toLowerCase();
+        return haystack.includes(term);
+    });
+
+    display(filtered);
+}
+
 for (var i = 0; i < btns.length; i++) {
     btns[i].addEventListener("click", function (e) {
         e.preventDefault();
@@ -83,5 +112,23 @@ for (var i = 0; i < btns.length; i++) {
             btns[j].classList.remove('active');
         }
         e.target.classList.add('active');
+    });
+}
+
+if (searchToggle && gameSearch) {
+    searchToggle.addEventListener("click", function (e) {
+        e.preventDefault();
+        gameSearch.focus();
+    });
+
+    gameSearch.addEventListener("input", function () {
+        searchGames(gameSearch.value);
+    });
+
+    gameSearch.addEventListener("keydown", function (e) {
+        if (e.key === "Escape") {
+            gameSearch.value = "";
+            display(allGames);
+        }
     });
 }

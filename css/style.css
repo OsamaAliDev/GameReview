@@ -129,35 +129,91 @@ h5 {
    ========================================================================== */
 
 .navbar {
-    background: var(--paper) !important;
-    border-bottom: 3px solid var(--ink);
-    padding-top: 1rem;
-    padding-bottom: 1rem;
+    position: sticky;
+    top: 0;
+    z-index: 1030;
+    background: #15161a !important;
+    border-bottom: 3px solid #f4f4f0;
+    padding-top: 0.85rem;
+    padding-bottom: 0.85rem;
+    box-shadow: 0 4px 0 rgba(255, 255, 255, 0.08);
+}
+
+.navbar .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.navbar-brand {
+    display: flex;
+    align-items: center;
+    margin-right: 1.2rem;
 }
 
 .navbar-brand img {
     filter: none;
+    height: 38px;
+}
+
+.navbar-collapse {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-grow: 1;
+}
+
+.navbar-nav {
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;
+    gap: 0.2rem;
+}
+
+.navbar-nav .nav-item {
+    display: flex;
+    align-items: center;
+}
+
+.navbar .navbar-brand,
+.navbar .nav-top-link,
+.navbar .icon-btn,
+.navbar .navbar-toggler {
+    color: #f4f4f0 !important;
+}
+
+.navbar-toggler-icon {
+    filter: brightness(0) invert(1);
 }
 
 .nav-top-link {
     font-family: var(--font-body);
     font-weight: 700;
-    font-size: 0.85rem;
+    font-size: 0.82rem;
     letter-spacing: 0.06em;
     text-transform: uppercase;
-    color: var(--ink) !important;
-    padding: 0.5rem 0.8rem !important;
+    padding: 0.45rem 0.7rem !important;
+    border-radius: 4px;
     position: relative;
+    transition: color 0.2s ease, background-color 0.2s ease;
+}
+
+.nav-top-link:hover,
+.nav-top-link:focus-visible,
+.nav-top-link.active {
+    color: #ff4438 !important;
+    background: rgba(255, 68, 56, 0.14);
 }
 
 .nav-top-link::after {
     content: "";
     position: absolute;
-    left: 0.8rem;
-    right: 0.8rem;
-    bottom: 0.25rem;
-    height: 3px;
-    background: var(--red);
+    left: 0.7rem;
+    right: 0.7rem;
+    bottom: 0.16rem;
+    height: 2px;
+    background: #ff4438;
     transform: scaleX(0);
     transform-origin: left;
     transition: transform 0.15s ease;
@@ -169,8 +225,8 @@ h5 {
 }
 
 .dropdown-menu {
-    background: var(--paper);
-    border: 3px solid var(--ink);
+    background: #1b1d24;
+    border: 2px solid #f4f4f0;
     border-radius: 0;
     padding: 0.3rem;
     box-shadow: var(--hard-shadow);
@@ -179,45 +235,80 @@ h5 {
 .dropdown-item {
     font-family: var(--font-body);
     font-weight: 600;
-    color: var(--ink);
+    color: #f4f4f0;
     border-radius: 0;
     padding: 0.5rem 0.8rem;
 }
 
 .dropdown-item:hover,
 .dropdown-item:focus {
-    background: var(--yellow);
-    color: var(--ink);
+    background: #ff4438;
+    color: #15161a;
 }
 
 .icon-btn {
-    color: var(--ink) !important;
+    color: #f4f4f0 !important;
     font-size: 0.95rem;
-    padding: 0.5rem 0.55rem !important;
+    padding: 0.45rem 0.6rem !important;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 4px;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    background: transparent;
+    transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
 }
 
 .icon-btn:hover {
-    color: var(--red) !important;
+    color: #ff4438 !important;
+    background: rgba(255, 68, 56, 0.12);
+    border-color: rgba(255, 68, 56, 0.35);
+}
+
+.search-input {
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    background: #1f2127;
+    color: #f4f4f0;
+    padding: 0.44rem 0.7rem;
+    font-size: 0.9rem;
+    min-width: 200px;
+    max-width: 220px;
+    border-radius: 4px;
+    height: 38px;
+}
+
+.search-input::placeholder {
+    color: #b7b8be;
+}
+
+.search-input:focus {
+    outline: 2px solid #ff4438;
+    outline-offset: 1px;
+    background: #24262d;
 }
 
 .btn-outline-ftg {
-    border: 2px solid var(--ink);
-    color: var(--ink);
-    padding: 0.4rem 0.9rem;
+    border: 2px solid #f4f4f0;
+    color: #f4f4f0;
+    background: transparent;
+    padding: 0.45rem 0.9rem;
     border-radius: var(--radius);
     font-family: var(--font-body);
     font-weight: 700;
     letter-spacing: 0.04em;
     text-transform: uppercase;
     font-size: 0.82rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.12s ease;
 }
 
 .btn-outline-ftg:hover {
-    background: var(--ink);
-    color: var(--paper);
-    box-shadow: 4px 4px 0 var(--red);
-    transform: translate(-2px, -2px);
+    background: #f4f4f0;
+    color: #15161a;
+    box-shadow: 0 0 0 3px rgba(255, 68, 56, 0.18);
+    transform: none;
 }
 
 /* ==========================================================================

@@ -30,7 +30,7 @@
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="nav">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0 align-items-center">
             <li class="nav-item dropdown">
               <a
                 class="nav-top-link dropdown-toggle"
@@ -62,16 +62,27 @@
             </li>
             <li class="nav-item"><a class="nav-top-link" href="#">API</a></li>
           </ul>
-          <ul class="navbar-nav ms-auto align-items-center">
+          <ul class="navbar-nav ms-auto align-items-center gap-2 flex-nowrap">
             <li class="nav-item me-1">
-              <a
-                class="icon-btn"
-                href="#"
-                data-bs-toggle="tooltip"
-                title="Search"
-                ><i class="fas fa-search"></i
-                ><span class="ms-1 d-lg-none"> Search</span></a
-              >
+              <div class="d-flex align-items-center gap-2">
+                <a
+                  id="searchToggle"
+                  class="icon-btn"
+                  href="#"
+                  data-bs-toggle="tooltip"
+                  title="Search"
+                  aria-label="Search games"
+                  ><i class="fas fa-search"></i
+                  ><span class="ms-1 d-lg-none"> Search</span></a
+                >
+                <input
+                  id="gameSearch"
+                  class="search-input"
+                  type="search"
+                  placeholder="Search games..."
+                  aria-label="Search games"
+                />
+              </div>
             </li>
             <li class="nav-item me-1">
               <a
