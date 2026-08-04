@@ -41,7 +41,7 @@ async function getGame(category = '') {
         display(result);
     } catch (error) {
         console.error(error);
-        rowBody.innerHTML = '<div class="col-12"><p class="text-center text-danger">حدث خطأ أثناء تحميل البيانات.</p></div>';
+        rowBody.innerHTML = '<div class="col-12"><p class="text-center text-danger">error.</p></div>';
     } finally {
         loading.classList.add("d-none");
     }
@@ -51,7 +51,7 @@ getGame();
 
 function display(arr) {
     if (!arr || arr.length === 0) {
-        rowBody.innerHTML = '<div class="col-12"><p class="text-center">لم يتم العثور على ألعاب.</p></div>';
+        rowBody.innerHTML = '<div class="col-12"><p class="text-center">للعبه مش موجوده</p></div>';
         return;
     }
 

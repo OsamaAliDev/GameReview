@@ -4,7 +4,7 @@ var gameModalBody = document.getElementById("gameModalBody");
 var gameModal = new bootstrap.Modal(document.getElementById("gameModal"));
 
 async function getGameDetails(id) {
-    gameModalBody.innerHTML = '<p class="text-center">جاري التحميل...</p>';
+    gameModalBody.innerHTML = '<p class="text-center">loading....</p>';
     gameModal.show();
 
     const url = `https://free-to-play-games-database.p.rapidapi.com/api/game?id=${id}`;
@@ -23,7 +23,7 @@ async function getGameDetails(id) {
         renderGameModal(game);
     } catch (error) {
         console.error(error);
-        gameModalBody.innerHTML = '<p class="text-danger text-center">تعذر تحميل التفاصيل.</p>';
+        gameModalBody.innerHTML = '<p class="text-danger text-center">loading....</p>';
     }
 }
 
